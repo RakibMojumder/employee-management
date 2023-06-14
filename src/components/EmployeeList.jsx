@@ -31,10 +31,6 @@ const EmployeeList = () => {
     setEmployees(employees);
   });
 
-  const handleSearch = (searchValue) => {
-    console.log(searchValue);
-  };
-
   if (isLoading) return;
 
   return (
@@ -71,9 +67,19 @@ const EmployeeList = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {employees.map((employee) => (
-              <User key={employee.empId} user={employee} />
-            ))}
+            {employees
+              .filter((item) => {
+                if (searchValue === "") {
+                  return item;
+                } else {
+                  return item.firstName
+                    .toLowerCase()
+                    .includes(searchValue.toLowerCase());
+                }
+              })
+              .map((employee) => (
+                <User key={employee.empId} user={employee} />
+              ))}
           </TableBody>
         </Table>
       </TableContainer>

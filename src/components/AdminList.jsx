@@ -16,6 +16,7 @@ import User from "./User";
 
 const AdminList = () => {
   const [admins, setAdmins] = useState([]);
+  const [searchValue, setSearchValue] = useState("");
   const { isLoading } = useQuery(["employee"], async () => {
     const res = await axios.get(
       "http://59.152.62.177:8085/api/Employee/EmployeeData "
@@ -44,7 +45,7 @@ const AdminList = () => {
           marginBottom: "10px",
         }}
       >
-        <SearchBox />
+        <SearchBox setSearchValue={setSearchValue} />
       </Box>
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -66,9 +67,19 @@ const AdminList = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {admins.map((admin) => (
-              <User key={admin.empId} user={admin} />
-            ))}
+            {admins
+              .filter((item) => {
+                if (searchValue === "") {
+                  return item;
+                } else {
+                  return item.firstName
+                    .toLowerCase()
+                    .includes(searchValue.toLowerCase());
+                }
+              })
+              .map((admin) => (
+                <User key={admin.empId} user={admin} />
+              ))}
           </TableBody>
         </Table>
       </TableContainer>

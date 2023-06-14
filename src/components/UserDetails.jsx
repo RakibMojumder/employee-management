@@ -20,7 +20,7 @@ const UserDetails = () => {
     >
       <Box
         sx={{
-          width: "400px",
+          width: "350px",
           display: "flex",
           alignItems: "center",
           border: 1,
