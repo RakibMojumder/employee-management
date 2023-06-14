@@ -3,7 +3,7 @@ import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import Fade from "@mui/material/Fade";
 import Typography from "@mui/material/Typography";
-import { useFormik, Formik, Field } from "formik";
+import { useFormik } from "formik";
 import axios from "axios";
 import { useState } from "react";
 import { addUserSchema } from "../YupSchema/YupSchema";
@@ -35,7 +35,7 @@ const AddUser = ({ open, setOpen, handleClose }) => {
   // SUBMITTING FORM
   const { values, errors, handleChange, handleSubmit } = useFormik({
     initialValues: initialValues,
-    // If i add validation schema "form" is not submitted. I don't know why. I google it but could not find anything
+    // If i add validation schema "Form" is not submitted. I don't know why. I google it but could not find anything
     // validationSchema: addUserSchema,
     onSubmit: async (values) => {
       const res = await axios.post(

@@ -1,5 +1,8 @@
 import { useQuery } from "react-query";
 import axios from "axios";
+import User from "./User";
+import SearchBox from "./SearchBox";
+import { useState } from "react";
 import {
   Box,
   Paper,
@@ -10,9 +13,6 @@ import {
   TableHead,
   TableRow,
 } from "@mui/material";
-import User from "./User";
-import SearchBox from "./SearchBox";
-import { useState } from "react";
 
 const EmployeeList = () => {
   const [employees, setEmployees] = useState([]);

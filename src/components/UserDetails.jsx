@@ -32,8 +32,8 @@ const UserDetails = () => {
         <img
           src="https://img.freepik.com/free-icon/user_318-159711.jpg"
           alt=""
-          height={150}
-          width={150}
+          height={120}
+          width={120}
         />
         <Box>
           <Typography variant="h5">{`${state?.firstName} ${state?.lastName}`}</Typography>
@@ -45,7 +45,7 @@ const UserDetails = () => {
           startIcon={<BorderColorIcon />}
           size="small"
           onClick={handleOpen}
-          sx={{ position: "absolute", top: "10px", right: "20px" }}
+          sx={{ position: "absolute", top: "0", right: "0" }}
         ></Button>
       </Box>
       {open && (
