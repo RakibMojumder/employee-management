@@ -1,6 +1,13 @@
 import { Button, TableCell, TableRow } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const User = ({ user }) => {
+  const navigate = useNavigate();
+
+  const handleNavigate = (id) => {
+    navigate(`/user/${id}`, { state: user });
+  };
+
   return (
     <TableRow
       sx={{
@@ -16,7 +23,11 @@ const User = ({ user }) => {
       <TableCell align="center">{user.disvision}</TableCell>
       <TableCell align="center">{user.district}</TableCell>
       <TableCell align="center">
-        <Button variant="outlined" size="small">
+        <Button
+          onClick={() => handleNavigate(user.empID)}
+          variant="outlined"
+          size="small"
+        >
           Details
         </Button>
       </TableCell>

@@ -1,12 +1,18 @@
-import Backdrop from "@mui/material/Backdrop";
-import Box from "@mui/material/Box";
-import Modal from "@mui/material/Modal";
-import Fade from "@mui/material/Fade";
-import Typography from "@mui/material/Typography";
-import { useFormik, Formik, Field } from "formik";
+import {
+  Backdrop,
+  Box,
+  Fade,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Modal,
+  Select,
+  Typography,
+} from "@mui/material";
 import axios from "axios";
+import { useFormik } from "formik";
 import { useState } from "react";
-import { addUserSchema } from "../YupSchema/YupSchema";
+import { useQuery } from "react-query";
 import Form from "./Form";
 
 const style = {
@@ -20,29 +26,21 @@ const style = {
   p: 3,
 };
 
-let initialValues = {
-  firstName: "",
-  lastName: "",
-  disvision: "",
-  district: "",
-  employeeType: "",
-};
-
-const AddUser = ({ open, setOpen, handleClose }) => {
+const UpdateUser = ({ open, setOpen, handleClose, user }) => {
   const [divisionId, setDivisionId] = useState(null);
   const [districeID, setDistriceID] = useState(null);
+  const { empID, ...rest } = user;
 
   // SUBMITTING FORM
-  const { values, errors, handleChange, handleSubmit } = useFormik({
-    initialValues: initialValues,
+  const { errors, handleChange, handleSubmit } = useFormik({
+    initialValues: rest,
     // If i add validation schema "form" is not submitted. I don't know why. I google it but could not find anything
     // validationSchema: addUserSchema,
     onSubmit: async (values) => {
-      const res = await axios.post(
-        "http://59.152.62.177:8085/api/Employee/SaveEmployeeInformation",
+      const res = await axios.put(
+        `http://59.152.62.177:8085/api/Employee/UpdateEmployeeInformation/${empID}`,
         { ...values, divisionId, districeID }
       );
-      console.log(res);
       setOpen(false);
     },
   });
@@ -68,13 +66,15 @@ const AddUser = ({ open, setOpen, handleClose }) => {
             variant="h6"
             sx={{ mb: 2, textAlign: "center" }}
           >
-            Add User
+            Update user
           </Typography>
+
           <Form
             handleChange={handleChange}
             setDivisionId={setDivisionId}
             setDistriceID={setDistriceID}
             handleSubmit={handleSubmit}
+            user={user}
           />
         </Box>
       </Fade>
@@ -82,4 +82,4 @@ const AddUser = ({ open, setOpen, handleClose }) => {
   );
 };
 
-export default AddUser;
+export default UpdateUser;

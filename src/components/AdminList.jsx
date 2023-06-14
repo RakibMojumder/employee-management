@@ -23,16 +23,15 @@ const AdminList = () => {
 
     let admins = [];
     res.data.readEmployeeData.forEach((user) => {
-      if (user.employeeType === "Admin") {
+      if (user.employeeType.toLowerCase() === "admin") {
         admins.push(user);
       }
     });
     setAdmins(admins);
-    console.log(admins);
   });
 
   if (isLoading) return;
-  console.log(admins);
+
   return (
     <Box>
       <Box

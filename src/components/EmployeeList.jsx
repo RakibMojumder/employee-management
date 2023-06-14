@@ -24,12 +24,11 @@ const EmployeeList = () => {
 
     let employees = [];
     res.data.readEmployeeData.forEach((user) => {
-      if (user.employeeType === "Employee") {
+      if (user.employeeType.toLowerCase() === "employee") {
         employees.push(user);
       }
     });
     setEmployees(employees);
-    console.log(employees);
   });
 
   const handleSearch = (searchValue) => {

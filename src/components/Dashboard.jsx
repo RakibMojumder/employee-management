@@ -30,7 +30,10 @@ const Dashboard = () => {
           <TabList onChange={handleChange} aria-label="lab API tabs example">
             <Tab label="User" value="1" sx={{ fontWeight: 600 }} />
             <Tab label="Employee" value="2" sx={{ fontWeight: 600 }} />
-            <Button onClick={handleOpen} sx={{ fontWeight: 600 }}>
+            <Button
+              onClick={handleOpen}
+              sx={{ fontWeight: 600, color: "gray" }}
+            >
               Add User
             </Button>
           </TabList>
@@ -42,7 +45,9 @@ const Dashboard = () => {
           <EmployeeList />
         </TabPanel>
       </TabContext>
-      {open && <AddUser open={open} handleClose={handleClose} />}
+      {open && (
+        <AddUser open={open} setOpen={setOpen} handleClose={handleClose} />
+      )}
     </Box>
   );
 };
